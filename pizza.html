@@ -21,7 +21,7 @@
 
                     <div class="btn-group mb-3">
                         <button type="button" class="w-100 btn btn-primary rounded-0" id="btn_portions_minus">-</button>
-                        <input type="number" id="input_portions" class="w-100 form-control text-center rounded-0" value="1" min="1" style="width: 80px; appearance: textfield;">
+                        <input type="number" id="input_portions" class="w-100 form-control text-center rounded-0" min="1" style="width: 80px; appearance: textfield;">
                         <button type="button" class="w-100 btn btn-primary rounded-0" id="btn_portions_plus">+</button>
                     </div>
 
@@ -211,7 +211,7 @@
                         </div>
                         <div class="card my-1 w-100 border border-0">
                             <div class="card-body py-1 px-2">
-                                <span>Spread out and prepare the dough in pizza shape. Add sauce. Add hard toppings. Add cheese on top. (Order matters so nothing gets burnt.)</span>
+                                <span>Spread out and prepare the dough in pizza shape. Add sauce. Add salt and seasoning. Add hard toppings. Add cheese on top. (Order matters so nothing gets burnt.)</span>
                             </div>
                         </div>
                     </div>
@@ -247,7 +247,7 @@
         </footer>
         
         <script>
-            let portions = 1;
+            let portions = 2;
             const input_portions = document.getElementById("input_portions");
             const btn_minus = document.getElementById("btn_portions_minus");
             const btn_plus = document.getElementById("btn_portions_plus");
