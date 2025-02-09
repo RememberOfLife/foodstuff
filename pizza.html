@@ -19,10 +19,12 @@
                     
                     <!-- ingeredient table -->
 
-                    <div class="btn-group mb-3">
+                    <div class="btn-group mb-3 w-100">
                         <button type="button" class="w-100 btn btn-primary rounded-0" id="btn_portions_minus">-</button>
+                        <button type="button" class="w-100 btn btn-primary rounded-0 qs-btn_portions_reload d-none"><i class="bi bi-arrow-clockwise"></i></button>
                         <input type="number" id="input_portions" class="w-100 form-control text-center rounded-0" min="1" style="width: 80px; appearance: textfield;">
                         <button type="button" class="w-100 btn btn-primary rounded-0" id="btn_portions_plus">+</button>
+                        <button type="button" class="w-100 btn btn-primary rounded-0 qs-btn_portions_reload d-none"><i class="bi bi-arrow-clockwise"></i></button>
                     </div>
 
                     <table class="table table-sm table-striped w-100">
@@ -68,7 +70,7 @@
                     <table class="table table-sm table-striped w-100">
                         <thead class="table-dark">
                             <tr>
-                                <th scope="col" colspan="3">Toppings (per portion)</th>
+                                <th scope="col" colspan="3">Toppings (per portion / total)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -102,11 +104,11 @@
                         </div>
                         <div class="card my-2 w-100 bg-secondary-subtle border border-0">
                             <div class="card-body py-1 px-2">
-                                <span>Most oven need to be pre-heated appropriately. You should know this for your oven. Common ovens are turned before step 1. Proper pizza ovens are turned on just after step 5.</span>
+                                <span>Most ovens need to be pre-heated appropriately. You should know this for your oven. Common ovens are turned before step 1. Proper pizza ovens are turned on just after step 5.</span>
                                 <br>
-                                <span>For stone baked thin pizza: Top-450°C and Bottom-225°C</span>
+                                <span>For stone baked thin pizza: top 450°C and bottom 225°C</span>
                                 <br>
-                                <span>For thick pan pizza: Top-and-bottom-<span class="text-decoration-underline" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="most round pans should hold up at 325 even if they aren't technically made for it, but do not use square pans!">325°C</span></span>
+                                <span>For thick pan pizza: top-and-bottom 325°C <span class="text-secondary">(round pans are fine, <b>DO NOT</b> use square pans)</span></span>
                             </div>
                         </div>
                     </div>
@@ -191,7 +193,7 @@
                     <div class="card my-2 bg-info-subtle border border-0">
                         <div class="card-body py-1 px-2">
                             <i class="bi bi-sticky ps-0 pe-1"></i>
-                            <span>If you do not have a dough box for rising: <b><a class="link-body-emphasis" href="https://www.amazon.de/dp/B072P78PVP/">get one (link)</a></b>. Nevertheless, place the dough balls in oiled containers or bowls, making sure to coat the entire ball in oil. The rising time will be highly dependent on room temperature and take anything between 20 to 60 minutes.</span>
+                            <span>If you do not have a dough box for rising: <b><a class="link-body-emphasis" target="_blank" rel="noopener noreferrer" href="https://www.amazon.de/dp/B072P78PVP/"><i class="bi-box-arrow-up-right small mx-1"></i>get one (link)</a></b>. Nevertheless, place the dough balls in oiled containers or bowls, making sure to coat the entire ball in oil. The rising time will be highly dependent on room temperature and take anything between 20 to 60 minutes.</span>
                         </div>
                     </div>
                     <div class="card my-2 bg-danger-subtle border border-0">
@@ -238,6 +240,8 @@
 
         <!-- TODO picture gallery -->
 
+        <!-- TODO keep a changelog of past modifications to the recipe -->
+
         <footer class="mt-auto">
             <div class="mt-4 py-3 bg-body-secondary">
                 <div class="container text-center">
@@ -251,6 +255,7 @@
             const input_portions = document.getElementById("input_portions");
             const btn_minus = document.getElementById("btn_portions_minus");
             const btn_plus = document.getElementById("btn_portions_plus");
+            const btns_reload = document.getElementsByClassName("qs-btn_portions_reload");
             function recalculate_ingredient_totals() {
                 input_portions.value = portions;
                 const ingredients = document.querySelectorAll(".qs-ingredient");
@@ -269,22 +274,49 @@
             }
             btn_minus.addEventListener("click", () => {
                 if (portions > 1) {
-                    portions--;
+                    portions -= 1;
                     recalculate_ingredient_totals();
                 }
             });
             btn_plus.addEventListener("click", () => {
-                portions++;
+                portions += 1;
                 recalculate_ingredient_totals();
             });
-            document.getElementById('input_portions').addEventListener('change', function() {
-                const new_portions = parseFloat(this.value, 10);
-                if (new_portions < 1 || isNaN(new_portions)) {
+            input_portions.addEventListener("focus", () => {
+                btn_minus.classList.add("d-none");
+                btn_plus.classList.add("d-none");
+                for (let btn of btns_reload) {
+                    btn.classList.remove("d-none");
+                }
+            });
+            function resetUI() {
+                btn_minus.classList.remove("d-none");
+                btn_plus.classList.remove("d-none");
+                for (let btn of btns_reload) {
+                    btn.classList.add("d-none");
+                }
+            }
+            input_portions.addEventListener('change', function() {
+                var new_portions = parseFloat(this.value, 10);
+                if (new_portions < 0.1 || isNaN(new_portions)) {
                     new_portions = 1;
                 }
                 portions = new_portions;
                 recalculate_ingredient_totals();
+                resetUI();
             });
+            input_portions.addEventListener('keypress', function(event) {
+                if (event.key === "Enter") {
+                    this.blur();
+                    resetUI();
+                }
+            });
+            for (let btn of btns_reload) {
+                btn.addEventListener("click", () => {
+                    recalculate_ingredient_totals();
+                    resetUI();
+                });
+            }
             recalculate_ingredient_totals();
         </script>
 
