@@ -1,0 +1,20 @@
+html,
+body {
+    height: 100%;
+}
+
+.container-max-sm {
+    max-width: 540px;
+}
+
+.container-max-md {
+    max-width: 720px;
+}
+
+.container-max-lg {
+    max-width: 960px;
+}
+
+.text-small-caps {
+    font-variant: small-caps;
+}

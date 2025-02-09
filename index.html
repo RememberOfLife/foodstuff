@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Foodstuff</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" integrity="sha384-XGjxtQfXaH2tnPFa9x+ruJTuLE3Aa6LhHSWRr1XeTyhezb4abCG4ccI5AkVDxqC+" crossorigin="anonymous">
+        <link href="custom.css" rel="stylesheet">
+    </head>
+    <body class="d-flex flex-column pt-4 bg-body-tertiary">
+
+        <div class="container container-max-sm">
+
+            <h1><b>Foodstuff</b></h1>
+            <hr>
+            <h6><em>Foodstuff Basics</em></h6>
+            <ul>
+                <li><a href="pizza.html">Pizza</a></li>
+            </ul>
+            <hr>
+            <h5>What is this?</h5>
+            <p>
+                This is a super low-tech collection of my personal recipes. I usually put a recipe on here once a friend has asked me about it.
+                <br>
+                Since this is a new version, I will try to grow it with more recipes, imported from the old version&hellip;
+                <br>
+                Additionally, I will try to find a nice way to add images to the recipes. This way you can see what the result should look like, <i>and also</i> get some in-the-making pictures of the steps for better reproducability.
+            </p>
+
+        </div>
+
+        <footer class="mt-auto">
+            <div class="mt-4 py-3 bg-body-secondary">
+                <div class="container text-center">
+                    <span class="me-3">Copyright &copy; 2025 Urs Kober</span><a class="link-secondary text-small-caps" href="https://urskober.com/imprint/standalone">impressum</a>
+                </div>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script>
+            const tooltipList = [...document.querySelectorAll('[data-bs-toggle="tooltip"]')].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+        </script>
+    </body>
+</html>
